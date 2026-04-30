@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
-import tacosImg from "@assets/Capture_d’écran_2026-04-26_210927_1777234290324.png";
-import sandwichImg from "@assets/Capture_d’écran_2026-04-26_210947_1777234290324.png";
-import burgerImg from "@assets/Capture_d’écran_2026-04-26_211006_1777234290325.png";
+import tacosImg from "@assets/cleomenu01_1777259084372.jpg";
+import sandwichImg from "@assets/cleomenu02_1777259084372.jpg";
+import burgerImg from "@assets/cleomenu03_1777259084372.jpg";
 
 const offers = [
   {
