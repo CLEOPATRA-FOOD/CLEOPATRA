@@ -293,6 +293,21 @@
   width: max-content;
 }
 
+/* Developer credit pulse */
+@keyframes devCreditPulse {
+  0%, 100% {
+    box-shadow: 0 0 25px rgba(196, 151, 61, 0.45), 0 0 0 0 rgba(196, 151, 61, 0.5);
+    transform: translateY(0);
+  }
+  50% {
+    box-shadow: 0 0 45px rgba(196, 151, 61, 0.85), 0 0 0 8px rgba(196, 151, 61, 0);
+    transform: translateY(-2px);
+  }
+}
+.dev-credit-pulse {
+  animation: devCreditPulse 2.6s ease-in-out infinite;
+}
+
 /* Hide scrollbar but keep scroll functionality */
 .scrollbar-hide {
   -ms-overflow-style: none;
