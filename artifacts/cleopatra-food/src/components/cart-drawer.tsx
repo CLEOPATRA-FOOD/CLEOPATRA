@@ -17,7 +17,6 @@ import { useEffect, useMemo, useState } from "react";
 import { useCart } from "@/lib/cart-context";
 
 const PHONE_PRIMARY = "+213697179737";
-const DELIVERY_FEE = 200;
 
 type Step = "panier" | "details" | "envoi";
 
@@ -29,8 +28,7 @@ type CustomerInfo = {
 
 function buildOrderMessage(
   items: ReturnType<typeof useCart>["items"],
-  subtotal: number,
-  grandTotal: number,
+  total: number,
   info: CustomerInfo
 ) {
   const lines = items.map(
@@ -42,9 +40,7 @@ function buildOrderMessage(
       `Téléphone : ${info.phone}\n` +
       `Lieu de livraison : ${info.place}\n\n` +
       `Commande :\n${lines.join("\n")}\n\n` +
-      `Sous-total : ${subtotal} DA\n` +
-      `Livraison : ${DELIVERY_FEE} DA\n` +
-      `Total : ${grandTotal} DA\n\n` +
+      `Total : ${total} DA + Livraison\n\n` +
       `Merci !`
   );
 }
@@ -162,8 +158,7 @@ export function CartDrawer() {
   const placeValid = info.place.trim().length >= 3;
   const formValid = nameValid && phoneValid && placeValid;
 
-  const grandTotal = totalPrice + DELIVERY_FEE;
-  const orderText = buildOrderMessage(items, totalPrice, grandTotal, info);
+  const orderText = buildOrderMessage(items, totalPrice, info);
   const waHref = `https://wa.me/${PHONE_PRIMARY.replace("+", "")}?text=${orderText}`;
 
   function goToDetails() {
@@ -534,34 +529,19 @@ export function CartDrawer() {
                         <MapPin className="w-3 h-3 text-[#A0331C] mt-0.5 flex-shrink-0" />
                         <span className="text-[#1c130a]">{info.place}</span>
                       </div>
-                      <div className="border-t border-[#8C621C]/30 pt-2 mt-2 space-y-1.5">
-                        <div className="flex justify-between items-center text-xs">
-                          <span className="text-[10px] tracking-[0.3em] uppercase text-[#5C3F10]">
-                            Sous-total · {totalQty} pièce{totalQty > 1 ? "s" : ""}
+                      <div className="border-t border-[#8C621C]/30 pt-2 mt-2 flex justify-between items-center">
+                        <span className="text-[10px] tracking-[0.3em] uppercase text-[#5C3F10]">
+                          Total · {totalQty} pièce{totalQty > 1 ? "s" : ""}
+                        </span>
+                        <span className="font-serif text-lg text-gold-gradient flex items-baseline gap-1.5">
+                          {totalPrice}
+                          <span className="text-[10px] font-mono text-[#8C621C] tracking-widest">
+                            DA
                           </span>
-                          <span className="font-mono text-[#3d2c14]">
-                            {totalPrice} <span className="text-[#8C621C]">DA</span>
+                          <span className="text-[10px] font-mono text-[#A0331C] tracking-widest font-bold ml-1">
+                            + LIVRAISON
                           </span>
-                        </div>
-                        <div className="flex justify-between items-center text-xs">
-                          <span className="text-[10px] tracking-[0.3em] uppercase text-[#5C3F10]">
-                            Livraison
-                          </span>
-                          <span className="font-mono text-[#3d2c14]">
-                            {DELIVERY_FEE} <span className="text-[#8C621C]">DA</span>
-                          </span>
-                        </div>
-                        <div className="flex justify-between items-center pt-1.5 border-t border-[#8C621C]/20">
-                          <span className="text-[10px] tracking-[0.3em] uppercase text-[#A0331C] font-bold">
-                            Total
-                          </span>
-                          <span className="font-serif text-lg text-gold-gradient">
-                            {grandTotal}
-                            <span className="text-[10px] font-mono text-[#8C621C] ml-1 tracking-widest">
-                              DA
-                            </span>
-                          </span>
-                        </div>
+                        </span>
                       </div>
                     </div>
 
@@ -591,34 +571,21 @@ export function CartDrawer() {
             {/* Footer / Step navigation */}
             {items.length > 0 && step !== "envoi" && (
               <div className="relative border-t border-[#8C621C]/30 bg-[#ebdfc8]/80 backdrop-blur-sm pl-10 pr-5 py-4 space-y-3">
-                <div className="space-y-1">
-                  <div className="flex items-center justify-between text-xs">
-                    <span className="text-[10px] tracking-[0.3em] uppercase text-[#5C3F10]">
-                      Sous-total · {totalQty} pièce{totalQty > 1 ? "s" : ""}
-                    </span>
-                    <span className="font-mono text-[#3d2c14]">
-                      {totalPrice} <span className="text-[#8C621C]">DA</span>
-                    </span>
-                  </div>
-                  <div className="flex items-center justify-between text-xs">
-                    <span className="text-[10px] tracking-[0.3em] uppercase text-[#5C3F10] flex items-center gap-1">
-                      <Plus className="w-2.5 h-2.5 text-[#A0331C]" /> Livraison
-                    </span>
-                    <span className="font-mono text-[#3d2c14]">
-                      {DELIVERY_FEE} <span className="text-[#8C621C]">DA</span>
-                    </span>
-                  </div>
-                  <div className="flex items-center justify-between pt-2 border-t border-[#8C621C]/30">
-                    <p className="text-[10px] tracking-[0.4em] uppercase text-[#A0331C] font-bold">
-                      Total
+                <div className="flex items-end justify-between">
+                  <div>
+                    <p className="text-[10px] tracking-[0.4em] uppercase text-[#5C3F10]">
+                      Total · {totalQty} pièce{totalQty > 1 ? "s" : ""}
                     </p>
-                    <p className="font-serif text-2xl text-gold-gradient">
-                      {grandTotal}
-                      <span className="text-xs font-mono text-[#8C621C] ml-1 tracking-widest">
-                        DA
-                      </span>
+                    <p className="text-[10px] tracking-[0.3em] uppercase text-[#A0331C] font-bold mt-1">
+                      + LIVRAISON
                     </p>
                   </div>
+                  <p className="font-serif text-2xl text-gold-gradient">
+                    {totalPrice}
+                    <span className="text-xs font-mono text-[#8C621C] ml-1 tracking-widest">
+                      DA
+                    </span>
+                  </p>
                 </div>
 
                 <div className="grid grid-cols-2 gap-2">
