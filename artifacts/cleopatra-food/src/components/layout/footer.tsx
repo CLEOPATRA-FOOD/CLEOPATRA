@@ -101,7 +101,7 @@ export function Footer() {
           </div>
 
           {/* Handle text */}
-          <p className="text-[#C4973D] font-serif text-sm tracking-widest uppercase">
+          <p className="text-[#C4973D] font-serif text-sm tracking-widest lowercase">
             @cleopatrafoodbiskra
           </p>
 
