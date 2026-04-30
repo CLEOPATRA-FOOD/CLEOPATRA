@@ -1,7 +1,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef, useMemo } from "react";
 import logoImg from "@assets/305243862_504731711657679_4080429380307416125_n_1777234528149.jpg";
-import wordmarkImg from "@assets/e035150e-bae4-4520-ba8b-2e1590cbd2d0_1777235335919_1777522892759.png";
+import wordmarkImg from "@assets/cleopatra-wordmark-transparent.png";
 
 export function Hero() {
   const ref = useRef(null);

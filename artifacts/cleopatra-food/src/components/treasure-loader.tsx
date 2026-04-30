@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState, useMemo } from "react";
 
-import wordmarkImg from "@assets/e035150e-bae4-4520-ba8b-2e1590cbd2d0_1777235335919_1777522892759.png";
+import wordmarkImg from "@assets/cleopatra-wordmark-transparent.png";
 
 type Stage = "sealed" | "opening" | "revealed" | "gone";
 
