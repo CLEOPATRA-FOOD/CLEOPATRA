@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Cleopatra Food"
+version = "1.0.0"
+id = "artifacts/cleopatra-food"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 20768
+
+[services.development]
+run = "pnpm --filter @workspace/cleopatra-food run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/cleopatra-food", "run", "build" ]
+publicDir = "artifacts/cleopatra-food/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "20768"
+BASE_PATH = "/"
