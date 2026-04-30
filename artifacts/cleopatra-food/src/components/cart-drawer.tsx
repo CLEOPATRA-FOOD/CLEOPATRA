@@ -165,7 +165,6 @@ export function CartDrawer() {
   const grandTotal = totalPrice + DELIVERY_FEE;
   const orderText = buildOrderMessage(items, totalPrice, grandTotal, info);
   const waHref = `https://wa.me/${PHONE_PRIMARY.replace("+", "")}?text=${orderText}`;
-  const smsHref = `sms:${PHONE_PRIMARY}?body=${orderText}`;
 
   function goToDetails() {
     if (items.length === 0) return;
@@ -566,37 +565,23 @@ export function CartDrawer() {
                       </div>
                     </div>
 
-                    <div className="w-full grid grid-cols-2 gap-2 mb-3">
-                      <a
-                        href={waHref}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={() => {
-                          // small delay then close + clear
-                          setTimeout(() => {
-                            clear();
-                            close();
-                          }, 600);
-                        }}
-                        className="group relative flex items-center justify-center gap-2 px-4 py-3.5 bg-[#1c130a] text-[#f5ecd6] font-serif uppercase tracking-widest text-xs overflow-hidden"
-                        data-testid="cart-whatsapp"
-                      >
-                        <div className="absolute inset-0 bg-gradient-to-r from-[#A0331C] to-[#C4973D] translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
-                        <span className="relative">Envoyer WhatsApp</span>
-                      </a>
-                      <a
-                        href={`tel:${PHONE_PRIMARY}`}
-                        className="flex items-center justify-center gap-2 px-4 py-3.5 border border-[#8C621C] text-[#5C3F10] uppercase tracking-widest text-xs font-medium hover:bg-[#8C621C]/10 transition-colors"
-                        data-testid="cart-call"
-                      >
-                        <Phone className="w-3.5 h-3.5" /> Appeler
-                      </a>
-                    </div>
                     <a
-                      href={smsHref}
-                      className="block text-center text-[10px] tracking-[0.3em] uppercase text-[#5C3F10] hover:text-[#A0331C] transition-colors"
+                      href={waHref}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => {
+                        setTimeout(() => {
+                          clear();
+                          close();
+                        }, 600);
+                      }}
+                      className="group relative w-full flex items-center justify-center gap-2 px-4 py-4 bg-[#1c130a] text-[#f5ecd6] font-serif uppercase tracking-widest text-sm overflow-hidden"
+                      data-testid="cart-confirm"
                     >
-                      Ou envoyer par SMS
+                      <div className="absolute inset-0 bg-gradient-to-r from-[#A0331C] to-[#C4973D] translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
+                      <span className="relative flex items-center gap-2">
+                        <Check className="w-4 h-4" /> Confirmer la commande
+                      </span>
                     </a>
                   </motion.div>
                 )}
