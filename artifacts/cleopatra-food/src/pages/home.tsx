@@ -2,7 +2,6 @@ import { Hero } from "@/components/sections/hero";
 import { Story } from "@/components/sections/story";
 import { Menu } from "@/components/sections/menu";
 import { FullMenu } from "@/components/sections/full-menu";
-import { Icon } from "@/components/sections/icon";
 import { Gallery } from "@/components/sections/gallery";
 import { Contact } from "@/components/sections/contact";
 import { Cta } from "@/components/sections/cta";
@@ -21,7 +20,6 @@ export default function Home() {
         <Hero />
         <FullMenu />
         <Menu />
-        <Icon />
         <Story />
         <WordmarkStrip />
         <Gallery />
