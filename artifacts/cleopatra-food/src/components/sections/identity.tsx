@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import logoImg from "@assets/305243862_504731711657679_4080429380307416125_n_1777234528149.jpg";
-const wordmarkImg = "/images/cleopatra-wordmark.png";
+import wordmarkImg from "@assets/e035150e-bae4-4520-ba8b-2e1590cbd2d0_1777235335919_1777522892759.png";
 
 const palette = [
   { name: "Espresso", hex: "#1c130a", text: "Foreground" },
