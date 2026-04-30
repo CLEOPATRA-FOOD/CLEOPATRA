@@ -3,7 +3,6 @@ import { Story } from "@/components/sections/story";
 import { Menu } from "@/components/sections/menu";
 import { FullMenu } from "@/components/sections/full-menu";
 import { Gallery } from "@/components/sections/gallery";
-import { Testimonials } from "@/components/sections/testimonials";
 import { Contact } from "@/components/sections/contact";
 import { Cta } from "@/components/sections/cta";
 import { Navbar } from "@/components/layout/navbar";
@@ -24,7 +23,6 @@ export default function Home() {
         <Story />
         <WordmarkStrip />
         <Gallery />
-        <Testimonials />
         <Contact />
         <Cta />
       </main>
